@@ -1,0 +1,89 @@
+This is a Python program to sort using a binary search tree.
+
+Problem Description
+The program sorts a list using a binary search tree.
+
+Problem Solution
+1. Create a class BSTNode with instance variables key, left, right and parent.
+2. Define methods insert and inorder in BSTNode.
+3. The method insert takes a node as argument and inserts that node in the BST with the BSTNode object as root.
+4. The method inorder displays the inorder traversal of the BST with the BSTNode object as root.
+5. Create a class BSTree with instance variable root.
+6. Define methods inorder and add in BSTree.
+7. The method inorder calls the inorder method of the root node.
+8. The method add takes a key as argument and adds a node with that key by calling the insert method of the root node.
+
+Program/Source Code
+Here is the source code of a Python program to sort a list using a binary search tree. The program output is shown below.
+
+class BSTNode:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+        self.parent = None
+ 
+    def insert(self, node):
+        if self.key > node.key:
+            if self.left is None:
+                self.left = node
+                node.parent = self
+            else:
+                self.left.insert(node)
+        elif self.key <= node.key:
+            if self.right is None:
+                self.right = node
+                node.parent = self
+            else:
+                self.right.insert(node)
+ 
+    def inorder(self):
+        if self.left is not None:
+            self.left.inorder()
+        print(self.key, end=' ')
+        if self.right is not None:
+            self.right.inorder()
+ 
+ 
+class BSTree:
+    def __init__(self):
+        self.root = None
+ 
+    def inorder(self):
+        if self.root is not None:
+            self.root.inorder()
+ 
+    def add(self, key):
+        new_node = BSTNode(key)
+        if self.root is None:
+            self.root = new_node
+        else:
+            self.root.insert(new_node)
+ 
+ 
+bstree = BSTree()
+ 
+alist = input('Enter the list of numbers: ').split()
+alist = [int(x) for x in alist]
+for x in alist:
+    bstree.add(x)
+print('Sorted list: ', end='')
+bstree.inorder()
+
+Program Explanation
+1. The user is prompted to enter a list of numbers.
+2. Each element in the list is added to the binary search tree.
+3. The inorder traversal of the binary search tree is displayed.
+
+Runtime Test Cases
+Case 1:
+Enter the list of numbers: 4 2 3 4 5 6 1 7 9 10 3
+Sorted list: 1 2 3 3 4 4 5 6 7 9 10 
+ 
+Case 2:
+Enter the list of numbers: 6 5 4 3 2 1
+Sorted list: 1 2 3 4 5 6 
+ 
+Case 3:
+Enter the list of numbers: 5
+Sorted list: 5
