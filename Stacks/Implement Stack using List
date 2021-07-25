@@ -1,0 +1,103 @@
+This is a Python program to implement a stack.
+
+Problem Description
+The program creates a stack and allows the user to perform push and pop operations on it.
+
+Problem Solution
+1. Create a class Stack with instance variable items initialized to an empty list.
+2. Define methods push, pop and is_empty inside the class Stack.
+3. The method push appends data to items.
+4. The method pop pops the first element in items.
+5. The method is_empty returns True only if items is empty.
+6. Create an instance of Stack and present a menu to the user to perform operations on the stack.
+
+Program/Source Code
+Here is the source code of a Python program to implement a stack. The program output is shown below.
+
+class Stack:
+    def __init__(self):
+        self.items = []
+ 
+    def is_empty(self):
+        return self.items == []
+ 
+    def push(self, data):
+        self.items.append(data)
+ 
+    def pop(self):
+        return self.items.pop()
+ 
+ 
+s = Stack()
+while True:
+    print('push <value>')
+    print('pop')
+    print('quit')
+    do = input('What would you like to do? ').split()
+ 
+    operation = do[0].strip().lower()
+    if operation == 'push':
+        s.push(int(do[1]))
+    elif operation == 'pop':
+        if s.is_empty():
+            print('Stack is empty.')
+        else:
+            print('Popped value: ', s.pop())
+    elif operation == 'quit':
+        break
+        
+        
+Program Explanation
+1. An instance of Stack is created.
+2. The user is presented with a menu to perform push and pop operations on the stack.
+3. The chosen operation is performed by calling the corresponding method of the stack.
+
+Runtime Test Cases
+Case 1:
+push <value>
+pop
+quit
+What would you like to do? push 3
+push <value>
+pop
+quit
+What would you like to do? push 5
+push <value>
+pop
+quit
+What would you like to do? pop
+Popped value:  5
+push <value>
+pop
+quit
+What would you like to do? pop
+Popped value:  3
+push <value>
+pop
+quit
+What would you like to do? pop
+Stack is empty.
+push <value>
+pop
+quit
+What would you like to do? quit
+ 
+Case 2:
+push <value>
+pop
+quit
+What would you like to do? pop
+Stack is empty.
+push <value>
+pop
+quit
+What would you like to do? push 1
+push <value>
+pop
+quit
+What would you like to do? pop
+Popped value:  1
+push <value>
+pop
+quit
+What would you like to do? quit
