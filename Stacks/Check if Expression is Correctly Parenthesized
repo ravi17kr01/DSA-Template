@@ -1,0 +1,75 @@
+This is a Python program to check whether an expression is correctly parenthesized.
+
+Problem Description
+The program prompts the user for a string and determines whether it is a palindrome with the help of a stack.
+
+Problem Solution
+1. Create a class Stack with instance variable items initialized to an empty list.
+2. Define methods push, pop and is_empty inside the class Stack.
+3. The method push appends data to items.
+4. The method pop pops the first element in items.
+5. The method is_empty returns True only if items is empty.
+6. Prompt the user for an expression.
+7. Iterate through the characters of the expression and push to the stack if an open parenthesis is encountered and pop if a close parenthesis is encountered.
+8. Determine whether the expression has balanced parentheses.
+
+Program/Source Code
+Here is the source code of a Python program to check for balanced parentheses using a stack. The program output is shown below.
+
+class Stack:
+    def __init__(self):
+        self.items = []
+ 
+    def is_empty(self):
+        return self.items == []
+ 
+    def push(self, data):
+        self.items.append(data)
+ 
+    def pop(self):
+        return self.items.pop()
+ 
+ 
+s = Stack()
+exp = input('Please enter the expression: ')
+ 
+for c in exp:
+    if c == '(':
+        s.push(1)
+    elif c == ')':
+        if s.is_empty():
+            is_balanced = False
+            break
+        s.pop()
+else:
+    if s.is_empty():
+        is_balanced = True
+    else:
+        is_balanced = False
+ 
+if is_balanced:
+    print('Expression is correctly parenthesized.')
+else:
+    print('Expression is not correctly parenthesized.')
+  
+  
+# Program Explanation
+
+1. An instance of Stack is created.
+2. The user is prompted to enter an expression.
+3. Iterate through the expression and push to the stack for every open parenthesis and pop for every close parenthesis.
+4. If a pop is required when the stack is empty or the stack is not empty when the expression has been iterated over, then the expression is not correctly parenthesized.
+5. Display the result.
+
+Runtime Test Cases
+Case 1:
+Please enter the expression: (3 + 4 * (1 + (2))/(7 * (8 + 9)))
+Expression is correctly parenthesized.
+ 
+Case 2:
+Please enter the expression: (a + b))(3)
+Expression is not correctly parenthesized.
+ 
+Case 3:
+Please enter the expression: (4 + (3 * 2)
+Expression is not correctly parenthesized.
