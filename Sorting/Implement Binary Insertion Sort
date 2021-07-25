@@ -1,0 +1,73 @@
+This is a Python program to implement binary insertion sort.
+
+Problem Description
+The program sorts a list by binary insertion sort.
+
+Problem Solution
+1. Create a function binary insertion_sort that takes a list as argument.
+2. Inside the function create a loop with a loop variable i that counts from 1 to the length of the list – 1.
+3. Set temp equal to the element at index i.
+4. Call binary_search with key = temp, start = 0 and end = i.
+5. Set pos equal to one plus the return value of the above call.
+6. Shift all elements one position right from indexes pos + 1 to i inclusive and set alist[pos] to temp.
+7. Create a function binary_search that takes a list, a key and two indexes start and end as arguments.
+8. The function performs binary search to find key in the list between indexes start and end – 1 inclusive. If the key is not found, it returns the index of the largest element smaller than key. If key is smaller than the first element, it returns -1.
+
+Program/Source Code
+Here is the source code of a Python program to implement binary insertion sort. The program output is shown below.
+
+def binary_insertion_sort(alist):
+    for i in range(1, len(alist)):
+        temp = alist[i]
+        pos = binary_search(alist, temp, 0, i) + 1
+ 
+        for k in range(i, pos, -1):
+            alist[k] = alist[k - 1]
+ 
+        alist[pos] = temp
+ 
+def binary_search(alist, key, start, end):
+    '''If key is in the list at index p, then return p.
+    If there are multiple such keys in the list, then return the index of any one.
+    If key is not in the list and a < key < b where a and b are elements in the list, then return the index of a.
+    If key is not in the list and key < a where a is the first element in the list, then return -1.
+    Only elements with indexes start to end - 1 inclusive are considered.
+    '''
+    if end - start <= 1:
+        if key < alist[start]:
+            return start - 1
+        else:
+            return start
+ 
+    mid = (start + end)//2
+    if alist[mid] < key:
+        return binary_search(alist, key, mid, end)
+    elif alist[mid] > key:
+        return binary_search(alist, key, start, mid)
+    else:
+        return mid
+ 
+ 
+alist = input('Enter the list of numbers: ').split()
+alist = [int(x) for x in alist]
+binary_insertion_sort(alist)
+print('Sorted list: ', end='')
+print(alist)
+
+Program Explanation
+1. The user is prompted to enter a list of numbers.
+2. The list is passed to the binary insertion_sort function.
+3. The sorted list is displayed.
+
+Runtime Test Cases
+Case 1:
+Enter the list of numbers: 5 2 7 10 3 5 2 1 8 9
+Sorted list: [1, 2, 2, 3, 5, 5, 7, 8, 9, 10]
+ 
+Case 2:
+Enter the list of numbers: 7 5 5 4 3 2 1
+Sorted list: [1, 2, 3, 4, 5, 5, 7]
+ 
+Case 3:
+Enter the list of numbers: 2
+Sorted list: [2]
