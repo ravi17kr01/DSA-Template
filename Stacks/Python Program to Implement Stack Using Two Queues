@@ -1,0 +1,122 @@
+This is a Python program to implement a stack using two queues.
+
+Problem Description
+The program creates a stack using two queues and allows the user to perform push and pop operations on it.
+
+Problem Solution
+1. Create a class Queue with instance variable items initialized to an empty list.
+2. Define methods enqueue, dequeue and is_empty inside the class Queue.
+3. The method enqueue appends data to items.
+4. The method dequeue dequeues the first element in items.
+5. The method is_empty returns True only if items is empty.
+6. Create a class Stack with instance variable queue1 and queue2 initialized to empty queues.
+7. Define methods push, pop and is_empty inside the class Stack.
+8. The method push takes an argument and enqueues it in queue1. Then every element of queue2 is dequeued and enqueued in queue1. The names of queue1 and queue2 are then switched.
+9. The method pop dequeues from queue2 and returns the dequeued value.
+10. The method is_empty returns True only if queue2 is empty.
+
+Program/Source Code
+Here is the source code of a Python program to implement a stack using two queues. The program output is shown below.
+
+class Stack:
+    def __init__(self):
+        self.queue1 = Queue()
+        self.queue2 = Queue()
+ 
+    def is_empty(self):
+        return self.queue2.is_empty()
+ 
+    def push(self, data):
+        self.queue1.enqueue(data)
+        while not self.queue2.is_empty():
+            x = self.queue2.dequeue()
+            self.queue1.enqueue(x)
+        self.queue1, self.queue2 = self.queue2, self.queue1
+ 
+    def pop(self):
+        return self.queue2.dequeue()
+ 
+class Queue:
+    def __init__(self):
+        self.items = []
+ 
+    def is_empty(self):
+        return self.items == []
+ 
+    def enqueue(self, data):
+        self.items.append(data)
+ 
+    def dequeue(self):
+        return self.items.pop(0)
+ 
+ 
+s = Stack()
+ 
+print('Menu')
+print('push <value>')
+print('pop')
+print('quit')
+ 
+while True:
+    do = input('What would you like to do? ').split()
+ 
+    operation = do[0].strip().lower()
+    if operation == 'push':
+        s.push(int(do[1]))
+    elif operation == 'pop':
+        if s.is_empty():
+            print('Stack is empty.')
+        else:
+            print('Popped value: ', s.pop())
+    elif operation == 'quit':
+        break
+        
+
+#Program Explanation
+
+1. An instance of Stack is created.
+2. The user is presented with a menu to perform push and pop operations on the stack.
+3. The chosen operation is performed by calling the corresponding method of the stack.
+
+Runtime Test Cases
+Case 1:
+Menu
+push <value>
+pop
+quit
+What would you like to do? pop
+Stack is empty.
+What would you like to do? push 3
+What would you like to do? push 4
+What would you like to do? pop
+Popped value:  4
+What would you like to do? pop
+Popped value:  3
+What would you like to do? pop
+Stack is empty.
+What would you like to do? push 1
+What would you like to do? push 2
+What would you like to do? pop
+Popped value:  2
+What would you like to do? quit
+ 
+Case 2:
+Menu
+push <value>
+pop
+quit
+What would you like to do? push 1
+What would you like to do? push 2
+What would you like to do? push 5
+What would you like to do? push 0
+What would you like to do? pop
+Popped value:  0
+What would you like to do? pop
+Popped value:  5
+What would you like to do? pop
+Popped value:  2
+What would you like to do? pop
+Popped value:  1
+What would you like to do? pop
+Stack is empty.
+What would you like to do? quit
